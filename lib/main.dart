@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import 'key.dart';
 import 'picture.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -35,24 +36,23 @@ class _HomePageState extends State<HomePage> {
   final ScrollController _controller = ScrollController();
 
   String searchTerm = 'Travis Scott';
-  int _page=1;
+  int _page = 1;
   bool _isLoading = false;
-  bool _hasMore= true;
+  bool _hasMore = true;
   final List<Picture> _images = <Picture>[];
 
   @override
   void initState() {
     super.initState();
-    getImages( page: _page);
+    getImages(page: _page);
     _controller.addListener(_onScroll);
   }
 
-   @override
-   void dispose(){
+  @override
+  void dispose() {
     _controller.dispose();
     super.dispose();
-   }
-
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,9 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: const Text('Google Pictures'),
         actions: <Widget>[
-          if(_isLoading) const Center( child: FittedBox(child: Padding(padding: EdgeInsets.all(16),child: CircularProgressIndicator()))),
+          if (_isLoading)
+            const Center(
+                child: FittedBox(child: Padding(padding: EdgeInsets.all(16), child: CircularProgressIndicator()))),
         ],
       ),
       body: Column(
@@ -101,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   )
                 : GridView.builder(
-                  controller: _controller,
+                    controller: _controller,
                     itemCount: _images.length,
                     itemBuilder: (BuildContext context, int index) {
                       final Picture picture = _images[index];
@@ -109,17 +111,19 @@ class _HomePageState extends State<HomePage> {
                       return Stack(
                         fit: StackFit.expand,
                         children: <Widget>[
-                          GridTile(child:
-                       Image.network(picture.urls.regular,
-                      fit: BoxFit.cover ,)),
-                      // Align
-                      // (
-                      //   alignment: AlignmentDirectional.bottomEnd,
-                      //   child: ListTile(
-                      //     title: Text(picture.user.name),
-                      //     trailing: CircleAvatar(backgroundImage: NetworkImage(picture.user.profileImage.small)),
-                      //   )
-                      // )
+                          GridTile(
+                              child: Image.network(
+                            picture.urls.regular,
+                            fit: BoxFit.cover,
+                          )),
+                          // Align
+                          // (
+                          //   alignment: AlignmentDirectional.bottomEnd,
+                          //   child: ListTile(
+                          //     title: Text(picture.user.name),
+                          //     trailing: CircleAvatar(backgroundImage: NetworkImage(picture.user.profileImage.small)),
+                          //   )
+                          // )
                         ],
                       );
                     },
@@ -134,9 +138,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getImages({String? search, required int page}) async {
-    setState(() => _isLoading =true);
-        if(page==1){
-    _images.clear();  
+    setState(() => _isLoading = true);
+    if (page == 1) {
+      _images.clear();
     }
 
     final String query = search ?? searchTerm;
@@ -147,22 +151,24 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       final Map<String, dynamic> result = jsonDecode(response.body) as Map<String, dynamic>;
       final List<dynamic> imageResults = result['results'] as List<dynamic>;
-      _hasMore = result['total_pages'] as int <_page;
+      _hasMore = result['total_pages'] as int < _page;
       setState(() {
-        _images.addAll(imageResults.cast<Map<dynamic, dynamic>>().map((dynamic json) => Picture.fromJson(json as Map<String, dynamic>)));
-        _isLoading =false;
+        _images.addAll(imageResults
+            .cast<Map<dynamic, dynamic>>()
+            .map((dynamic json) => Picture.fromJson(json as Map<String, dynamic>)));
+        _isLoading = false;
       });
     }
   }
 
   void _onScroll() {
     final double height = MediaQuery.of(context).size.height;
-    final double offset =_controller.position.pixels;
-    final double maxScrollExtent= _controller.position.maxScrollExtent; 
-    
-    if(_hasMore && !_isLoading && maxScrollExtent - offset < 3* height){
+    final double offset = _controller.position.pixels;
+    final double maxScrollExtent = _controller.position.maxScrollExtent;
+
+    if (_hasMore && !_isLoading && maxScrollExtent - offset < 3 * height) {
       _page++;
       getImages(page: _page);
     }
-     }
+  }
 }

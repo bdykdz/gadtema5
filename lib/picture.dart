@@ -4,9 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'picture.freezed.dart';
 part 'picture.g.dart';
 
-
-
-
 @freezed
 abstract class Picture with _$Picture {
   const factory Picture({
@@ -27,10 +24,8 @@ abstract class Picture with _$Picture {
     required User user,
   }) = _Picture;
 
-  factory Picture.fromJson(Map<String, dynamic> json) =>
-      _$PictureFromJson(json);
+  factory Picture.fromJson(Map<String, dynamic> json) => _$PictureFromJson(json);
 }
-
 
 @freezed
 abstract class Urls with _$Urls {
@@ -43,7 +38,7 @@ abstract class Urls with _$Urls {
     @JsonKey(name: 'small_s3') required String smallS3,
   }) = _Urls;
 
-  factory Urls.fromJson(Map<String, dynamic> json) => _$UrlsFromJson(Map<String,dynamic>.from(json));
+  factory Urls.fromJson(Map<String, dynamic> json) => _$UrlsFromJson(Map<String, dynamic>.from(json));
 }
 
 @freezed
@@ -55,7 +50,7 @@ abstract class Links with _$Links {
     @JsonKey(name: 'download_location') required String downloadLocation,
   }) = _Links;
 
-  factory Links.fromJson(Map<String, dynamic> json) => _$LinksFromJson(Map<String,dynamic>.from(json));
+  factory Links.fromJson(Map<String, dynamic> json) => _$LinksFromJson(Map<String, dynamic>.from(json));
 }
 
 @freezed
@@ -65,7 +60,7 @@ abstract class Tag with _$Tag {
     required String title,
   }) = _Tag;
 
-  factory Tag.fromJson(Map<String, dynamic> json) => _$TagFromJson(Map<String,dynamic>.from(json));
+  factory Tag.fromJson(Map<String, dynamic> json) => _$TagFromJson(Map<String, dynamic>.from(json));
 }
 
 @freezed
@@ -76,36 +71,37 @@ class User with _$User {
     required String username,
     required String name,
     @JsonKey(name: 'first_name') required String firstName,
-    @JsonKey(name: 'last_name')  String? lastName,
-    @JsonKey(name: 'twitter_username')  String? twitterUsername,
+    @JsonKey(name: 'last_name') String? lastName,
+    @JsonKey(name: 'twitter_username') String? twitterUsername,
     @JsonKey(name: 'portfolio_url') String? portfolioUrl,
-     String? bio,
-     String? location,
+    String? bio,
+    String? location,
     required UserLinks links,
     required UserProfileImage profileImage,
-    @JsonKey(name: 'instagram_username')  String? instagramUsername,
-     int? totalCollections,
-     int? totalLikes,
-     int? totalPhotos,
-    @JsonKey(name: 'accepted_tos')  bool? acceptedTos,
+    @JsonKey(name: 'instagram_username') String? instagramUsername,
+    int? totalCollections,
+    int? totalLikes,
+    int? totalPhotos,
+    @JsonKey(name: 'accepted_tos') bool? acceptedTos,
     bool? forHire,
   }) = _User;
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(Map<String,dynamic>.from(json));
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(Map<String, dynamic>.from(json));
 }
+
 @freezed
 class UserLinks with _$UserLinks {
   const factory UserLinks({
-   String? self,
-   String? html,
-   String? photos,
-   String? likes,
-   String? portfolio,
-   String? following,
-   String? followers,
+    String? self,
+    String? html,
+    String? photos,
+    String? likes,
+    String? portfolio,
+    String? following,
+    String? followers,
   }) = _UserLinks;
 
-  factory UserLinks.fromJson(Map<String, dynamic> json) => _$UserLinksFromJson(Map<String,dynamic>.from(json));
+  factory UserLinks.fromJson(Map<String, dynamic> json) => _$UserLinksFromJson(Map<String, dynamic>.from(json));
 }
 
 @freezed
@@ -116,5 +112,6 @@ class UserProfileImage with _$UserProfileImage {
     required String large,
   }) = _UserProfileImage;
 
-  factory UserProfileImage.fromJson(Map<String, dynamic> json) => _$UserProfileImageFromJson(Map<String,dynamic>.from(json));
+  factory UserProfileImage.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileImageFromJson(Map<String, dynamic>.from(json));
 }

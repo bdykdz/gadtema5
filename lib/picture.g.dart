@@ -20,14 +20,11 @@ _$_Picture _$$_PictureFromJson(Map<String, dynamic> json) => _$_Picture(
       links: Links.fromJson(json['links'] as Map<String, dynamic>),
       likes: json['likes'] as int,
       likedByUser: json['liked_by_user'] as bool,
-      tags: (json['tags'] as List<dynamic>)
-          .map((e) => Tag.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      tags: (json['tags'] as List<dynamic>).map((e) => Tag.fromJson(e as Map<String, dynamic>)).toList(),
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_PictureToJson(_$_Picture instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_PictureToJson(_$_Picture instance) => <String, dynamic>{
       'id': instance.id,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
@@ -99,8 +96,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       bio: json['bio'] as String?,
       location: json['location'] as String?,
       links: UserLinks.fromJson(json['links'] as Map<String, dynamic>),
-      profileImage: UserProfileImage.fromJson(
-          json['profileImage'] as Map<String, dynamic>),
+      profileImage: UserProfileImage.fromJson(json['profileImage'] as Map<String, dynamic>),
       instagramUsername: json['instagram_username'] as String?,
       totalCollections: json['totalCollections'] as int?,
       totalLikes: json['totalLikes'] as int?,
@@ -140,8 +136,7 @@ _$_UserLinks _$$_UserLinksFromJson(Map<String, dynamic> json) => _$_UserLinks(
       followers: json['followers'] as String?,
     );
 
-Map<String, dynamic> _$$_UserLinksToJson(_$_UserLinks instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_UserLinksToJson(_$_UserLinks instance) => <String, dynamic>{
       'self': instance.self,
       'html': instance.html,
       'photos': instance.photos,
@@ -151,15 +146,13 @@ Map<String, dynamic> _$$_UserLinksToJson(_$_UserLinks instance) =>
       'followers': instance.followers,
     };
 
-_$_UserProfileImage _$$_UserProfileImageFromJson(Map<String, dynamic> json) =>
-    _$_UserProfileImage(
+_$_UserProfileImage _$$_UserProfileImageFromJson(Map<String, dynamic> json) => _$_UserProfileImage(
       small: json['small'] as String,
       medium: json['medium'] as String,
       large: json['large'] as String,
     );
 
-Map<String, dynamic> _$$_UserProfileImageToJson(_$_UserProfileImage instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_UserProfileImageToJson(_$_UserProfileImage instance) => <String, dynamic>{
       'small': instance.small,
       'medium': instance.medium,
       'large': instance.large,
