@@ -75,7 +75,7 @@ class User with _$User {
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
     required String username,
     required String name,
-    @JsonKey(name: 'first_name') String? firstName,
+    @JsonKey(name: 'first_name') required String firstName,
     @JsonKey(name: 'last_name')  String? lastName,
     @JsonKey(name: 'twitter_username')  String? twitterUsername,
     @JsonKey(name: 'portfolio_url') String? portfolioUrl,
