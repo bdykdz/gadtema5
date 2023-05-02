@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'key.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'key.dart';
 import 'picture.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -30,7 +30,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static String api_key = API_KEY_UNSPLASH;
+  static String apikey = API_KEY_UNSPLASH;
   final TextEditingController _searchImageController = TextEditingController();
   final ScrollController _controller = ScrollController();
 
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: const Text('Google Pictures'),
         actions: <Widget>[
-          if(_isLoading) Center( child: FittedBox(child: Padding(padding: const EdgeInsets.all(16),child: const CircularProgressIndicator()))),
+          if(_isLoading) const Center( child: FittedBox(child: Padding(padding: EdgeInsets.all(16),child: CircularProgressIndicator()))),
         ],
       ),
       body: Column(
@@ -143,13 +143,13 @@ class _HomePageState extends State<HomePage> {
     final http.Client client = http.Client();
     final Uri uri = Uri.parse('https://api.unsplash.com/search/photos?query=$query&per_page=30&page=$page');
     final http.Response response =
-        await client.get(uri, headers: <String, String>{'Authorization': 'Client-ID $api_key'});
+        await client.get(uri, headers: <String, String>{'Authorization': 'Client-ID $apikey'});
     if (response.statusCode == 200) {
       final Map<String, dynamic> result = jsonDecode(response.body) as Map<String, dynamic>;
       final List<dynamic> imageResults = result['results'] as List<dynamic>;
       _hasMore = result['total_pages'] as int <_page;
       setState(() {
-        _images.addAll(imageResults.cast<Map<dynamic, dynamic>>().map((json) => Picture.fromJson(json as Map<String, dynamic>)));
+        _images.addAll(imageResults.cast<Map<dynamic, dynamic>>().map((dynamic json) => Picture.fromJson(json as Map<String, dynamic>)));
         _isLoading =false;
       });
     }
