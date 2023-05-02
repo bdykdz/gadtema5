@@ -89,9 +89,22 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       final Picture picture = _images[index];
 
-                      return GridTile(child:
+                      return Stack(
+                        fit: StackFit.expand,
+                        children: <Widget>[
+                          GridTile(child:
                        Image.network(picture.urls.regular,
-                      fit: BoxFit.cover ,));
+                      fit: BoxFit.cover ,)),
+                      // Align
+                      // (
+                      //   alignment: AlignmentDirectional.bottomEnd,
+                      //   child: ListTile(
+                      //     title: Text(picture.user.name),
+                      //     trailing: CircleAvatar(backgroundImage: NetworkImage(picture.user.profileImage.small)),
+                      //   )
+                      // )
+                        ],
+                      );
                     },
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -113,15 +126,6 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       final Map<String, dynamic> result = jsonDecode(response.body) as Map<String, dynamic>;
       final List<dynamic> imageResults = result['results'] as List<dynamic>;
-
-      imageResults
-  .cast<Map<dynamic, dynamic>>()
-  .map((json) => Picture.fromJson(json as Map<String, dynamic>))
-  .toList();
-
-    
-
-
       setState(() {
         _images.addAll(imageResults.cast<Map<dynamic, dynamic>>().map((json) => Picture.fromJson(json as Map<String, dynamic>)));
       });

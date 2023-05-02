@@ -23,6 +23,7 @@ _$_Picture _$$_PictureFromJson(Map<String, dynamic> json) => _$_Picture(
       tags: (json['tags'] as List<dynamic>)
           .map((e) => Tag.fromJson(e as Map<String, dynamic>))
           .toList(),
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_PictureToJson(_$_Picture instance) =>
@@ -41,6 +42,7 @@ Map<String, dynamic> _$$_PictureToJson(_$_Picture instance) =>
       'likes': instance.likes,
       'liked_by_user': instance.likedByUser,
       'tags': instance.tags,
+      'user': instance.user,
     };
 
 _$_Urls _$$_UrlsFromJson(Map<String, dynamic> json) => _$_Urls(
@@ -90,8 +92,8 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       updatedAt: DateTime.parse(json['updated_at'] as String),
       username: json['username'] as String,
       name: json['name'] as String,
-      firstName: json['first_name'] as String,
-      lastName: json['last_name'] as String,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
       twitterUsername: json['twitter_username'] as String?,
       portfolioUrl: json['portfolio_url'] as String?,
       bio: json['bio'] as String?,
@@ -100,11 +102,11 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       profileImage: UserProfileImage.fromJson(
           json['profileImage'] as Map<String, dynamic>),
       instagramUsername: json['instagram_username'] as String?,
-      totalCollections: json['totalCollections'] as int,
-      totalLikes: json['totalLikes'] as int,
-      totalPhotos: json['totalPhotos'] as int,
-      acceptedTos: json['accepted_tos'] as bool,
-      forHire: json['forHire'] as bool,
+      totalCollections: json['totalCollections'] as int?,
+      totalLikes: json['totalLikes'] as int?,
+      totalPhotos: json['totalPhotos'] as int?,
+      acceptedTos: json['accepted_tos'] as bool?,
+      forHire: json['forHire'] as bool?,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -129,13 +131,13 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
     };
 
 _$_UserLinks _$$_UserLinksFromJson(Map<String, dynamic> json) => _$_UserLinks(
-      self: json['self'] as String,
-      html: json['html'] as String,
-      photos: json['photos'] as String,
-      likes: json['likes'] as String,
-      portfolio: json['portfolio'] as String,
-      following: json['following'] as String,
-      followers: json['followers'] as String,
+      self: json['self'] as String?,
+      html: json['html'] as String?,
+      photos: json['photos'] as String?,
+      likes: json['likes'] as String?,
+      portfolio: json['portfolio'] as String?,
+      following: json['following'] as String?,
+      followers: json['followers'] as String?,
     );
 
 Map<String, dynamic> _$$_UserLinksToJson(_$_UserLinks instance) =>

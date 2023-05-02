@@ -39,6 +39,7 @@ mixin _$Picture {
   @JsonKey(name: 'liked_by_user')
   bool get likedByUser => throw _privateConstructorUsedError;
   List<Tag> get tags => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,10 +65,12 @@ abstract class $PictureCopyWith<$Res> {
       Links links,
       int likes,
       @JsonKey(name: 'liked_by_user') bool likedByUser,
-      List<Tag> tags});
+      List<Tag> tags,
+      User user});
 
   $UrlsCopyWith<$Res> get urls;
   $LinksCopyWith<$Res> get links;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -97,6 +100,7 @@ class _$PictureCopyWithImpl<$Res, $Val extends Picture>
     Object? likes = null,
     Object? likedByUser = null,
     Object? tags = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -155,6 +159,10 @@ class _$PictureCopyWithImpl<$Res, $Val extends Picture>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ) as $Val);
   }
 
@@ -171,6 +179,14 @@ class _$PictureCopyWithImpl<$Res, $Val extends Picture>
   $LinksCopyWith<$Res> get links {
     return $LinksCopyWith<$Res>(_value.links, (value) {
       return _then(_value.copyWith(links: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
@@ -196,12 +212,15 @@ abstract class _$$_PictureCopyWith<$Res> implements $PictureCopyWith<$Res> {
       Links links,
       int likes,
       @JsonKey(name: 'liked_by_user') bool likedByUser,
-      List<Tag> tags});
+      List<Tag> tags,
+      User user});
 
   @override
   $UrlsCopyWith<$Res> get urls;
   @override
   $LinksCopyWith<$Res> get links;
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -228,6 +247,7 @@ class __$$_PictureCopyWithImpl<$Res>
     Object? likes = null,
     Object? likedByUser = null,
     Object? tags = null,
+    Object? user = null,
   }) {
     return _then(_$_Picture(
       id: null == id
@@ -286,13 +306,17 @@ class __$$_PictureCopyWithImpl<$Res>
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Picture implements _Picture {
+class _$_Picture with DiagnosticableTreeMixin implements _Picture {
   const _$_Picture(
       {required this.id,
       @JsonKey(name: 'created_at') required this.createdAt,
@@ -307,7 +331,8 @@ class _$_Picture implements _Picture {
       required this.links,
       required this.likes,
       @JsonKey(name: 'liked_by_user') required this.likedByUser,
-      required final List<Tag> tags})
+      required final List<Tag> tags,
+      required this.user})
       : _tags = tags;
 
   factory _$_Picture.fromJson(Map<String, dynamic> json) =>
@@ -353,8 +378,33 @@ class _$_Picture implements _Picture {
   }
 
   @override
-  String toString() {
-    return 'Picture(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, width: $width, height: $height, color: $color, blurHash: $blurHash, description: $description, altDescription: $altDescription, urls: $urls, links: $links, likes: $likes, likedByUser: $likedByUser, tags: $tags)';
+  final User user;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Picture(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, width: $width, height: $height, color: $color, blurHash: $blurHash, description: $description, altDescription: $altDescription, urls: $urls, links: $links, likes: $likes, likedByUser: $likedByUser, tags: $tags, user: $user)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Picture'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('width', width))
+      ..add(DiagnosticsProperty('height', height))
+      ..add(DiagnosticsProperty('color', color))
+      ..add(DiagnosticsProperty('blurHash', blurHash))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('altDescription', altDescription))
+      ..add(DiagnosticsProperty('urls', urls))
+      ..add(DiagnosticsProperty('links', links))
+      ..add(DiagnosticsProperty('likes', likes))
+      ..add(DiagnosticsProperty('likedByUser', likedByUser))
+      ..add(DiagnosticsProperty('tags', tags))
+      ..add(DiagnosticsProperty('user', user));
   }
 
   @override
@@ -381,7 +431,8 @@ class _$_Picture implements _Picture {
             (identical(other.likes, likes) || other.likes == likes) &&
             (identical(other.likedByUser, likedByUser) ||
                 other.likedByUser == likedByUser) &&
-            const DeepCollectionEquality().equals(other._tags, _tags));
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
@@ -401,7 +452,8 @@ class _$_Picture implements _Picture {
       links,
       likes,
       likedByUser,
-      const DeepCollectionEquality().hash(_tags));
+      const DeepCollectionEquality().hash(_tags),
+      user);
 
   @JsonKey(ignore: true)
   @override
@@ -432,7 +484,8 @@ abstract class _Picture implements Picture {
       required final Links links,
       required final int likes,
       @JsonKey(name: 'liked_by_user') required final bool likedByUser,
-      required final List<Tag> tags}) = _$_Picture;
+      required final List<Tag> tags,
+      required final User user}) = _$_Picture;
 
   factory _Picture.fromJson(Map<String, dynamic> json) = _$_Picture.fromJson;
 
@@ -469,6 +522,8 @@ abstract class _Picture implements Picture {
   bool get likedByUser;
   @override
   List<Tag> get tags;
+  @override
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_PictureCopyWith<_$_Picture> get copyWith =>
@@ -619,7 +674,7 @@ class __$$_UrlsCopyWithImpl<$Res> extends _$UrlsCopyWithImpl<$Res, _$_Urls>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Urls implements _Urls {
+class _$_Urls with DiagnosticableTreeMixin implements _Urls {
   const _$_Urls(
       {required this.raw,
       required this.full,
@@ -645,8 +700,21 @@ class _$_Urls implements _Urls {
   final String smallS3;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Urls(raw: $raw, full: $full, regular: $regular, small: $small, thumb: $thumb, smallS3: $smallS3)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Urls'))
+      ..add(DiagnosticsProperty('raw', raw))
+      ..add(DiagnosticsProperty('full', full))
+      ..add(DiagnosticsProperty('regular', regular))
+      ..add(DiagnosticsProperty('small', small))
+      ..add(DiagnosticsProperty('thumb', thumb))
+      ..add(DiagnosticsProperty('smallS3', smallS3));
   }
 
   @override
@@ -828,7 +896,7 @@ class __$$_LinksCopyWithImpl<$Res> extends _$LinksCopyWithImpl<$Res, _$_Links>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Links implements _Links {
+class _$_Links with DiagnosticableTreeMixin implements _Links {
   const _$_Links(
       {required this.self,
       required this.html,
@@ -849,8 +917,19 @@ class _$_Links implements _Links {
   final String downloadLocation;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Links(self: $self, html: $html, download: $download, downloadLocation: $downloadLocation)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Links'))
+      ..add(DiagnosticsProperty('self', self))
+      ..add(DiagnosticsProperty('html', html))
+      ..add(DiagnosticsProperty('download', download))
+      ..add(DiagnosticsProperty('downloadLocation', downloadLocation));
   }
 
   @override
@@ -996,7 +1075,7 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Tag implements _Tag {
+class _$_Tag with DiagnosticableTreeMixin implements _Tag {
   const _$_Tag({required this.type, required this.title});
 
   factory _$_Tag.fromJson(Map<String, dynamic> json) => _$$_TagFromJson(json);
@@ -1007,8 +1086,17 @@ class _$_Tag implements _Tag {
   final String title;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Tag(type: $type, title: $title)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Tag'))
+      ..add(DiagnosticsProperty('type', type))
+      ..add(DiagnosticsProperty('title', title));
   }
 
   @override
@@ -1065,9 +1153,9 @@ mixin _$User {
   String get username => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'first_name')
-  String get firstName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_name')
-  String get lastName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: 'twitter_username')
   String? get twitterUsername => throw _privateConstructorUsedError;
   @JsonKey(name: 'portfolio_url')
@@ -1078,12 +1166,12 @@ mixin _$User {
   UserProfileImage get profileImage => throw _privateConstructorUsedError;
   @JsonKey(name: 'instagram_username')
   String? get instagramUsername => throw _privateConstructorUsedError;
-  int get totalCollections => throw _privateConstructorUsedError;
-  int get totalLikes => throw _privateConstructorUsedError;
-  int get totalPhotos => throw _privateConstructorUsedError;
+  int? get totalCollections => throw _privateConstructorUsedError;
+  int? get totalLikes => throw _privateConstructorUsedError;
+  int? get totalPhotos => throw _privateConstructorUsedError;
   @JsonKey(name: 'accepted_tos')
-  bool get acceptedTos => throw _privateConstructorUsedError;
-  bool get forHire => throw _privateConstructorUsedError;
+  bool? get acceptedTos => throw _privateConstructorUsedError;
+  bool? get forHire => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1100,8 +1188,8 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'updated_at') DateTime updatedAt,
       String username,
       String name,
-      @JsonKey(name: 'first_name') String firstName,
-      @JsonKey(name: 'last_name') String lastName,
+      @JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
       @JsonKey(name: 'twitter_username') String? twitterUsername,
       @JsonKey(name: 'portfolio_url') String? portfolioUrl,
       String? bio,
@@ -1109,11 +1197,11 @@ abstract class $UserCopyWith<$Res> {
       UserLinks links,
       UserProfileImage profileImage,
       @JsonKey(name: 'instagram_username') String? instagramUsername,
-      int totalCollections,
-      int totalLikes,
-      int totalPhotos,
-      @JsonKey(name: 'accepted_tos') bool acceptedTos,
-      bool forHire});
+      int? totalCollections,
+      int? totalLikes,
+      int? totalPhotos,
+      @JsonKey(name: 'accepted_tos') bool? acceptedTos,
+      bool? forHire});
 
   $UserLinksCopyWith<$Res> get links;
   $UserProfileImageCopyWith<$Res> get profileImage;
@@ -1136,8 +1224,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? updatedAt = null,
     Object? username = null,
     Object? name = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? twitterUsername = freezed,
     Object? portfolioUrl = freezed,
     Object? bio = freezed,
@@ -1145,11 +1233,11 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? links = null,
     Object? profileImage = null,
     Object? instagramUsername = freezed,
-    Object? totalCollections = null,
-    Object? totalLikes = null,
-    Object? totalPhotos = null,
-    Object? acceptedTos = null,
-    Object? forHire = null,
+    Object? totalCollections = freezed,
+    Object? totalLikes = freezed,
+    Object? totalPhotos = freezed,
+    Object? acceptedTos = freezed,
+    Object? forHire = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -1168,14 +1256,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: null == firstName
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       twitterUsername: freezed == twitterUsername
           ? _value.twitterUsername
           : twitterUsername // ignore: cast_nullable_to_non_nullable
@@ -1204,26 +1292,26 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.instagramUsername
           : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      totalCollections: null == totalCollections
+      totalCollections: freezed == totalCollections
           ? _value.totalCollections
           : totalCollections // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalLikes: null == totalLikes
+              as int?,
+      totalLikes: freezed == totalLikes
           ? _value.totalLikes
           : totalLikes // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalPhotos: null == totalPhotos
+              as int?,
+      totalPhotos: freezed == totalPhotos
           ? _value.totalPhotos
           : totalPhotos // ignore: cast_nullable_to_non_nullable
-              as int,
-      acceptedTos: null == acceptedTos
+              as int?,
+      acceptedTos: freezed == acceptedTos
           ? _value.acceptedTos
           : acceptedTos // ignore: cast_nullable_to_non_nullable
-              as bool,
-      forHire: null == forHire
+              as bool?,
+      forHire: freezed == forHire
           ? _value.forHire
           : forHire // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 
@@ -1255,8 +1343,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'updated_at') DateTime updatedAt,
       String username,
       String name,
-      @JsonKey(name: 'first_name') String firstName,
-      @JsonKey(name: 'last_name') String lastName,
+      @JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
       @JsonKey(name: 'twitter_username') String? twitterUsername,
       @JsonKey(name: 'portfolio_url') String? portfolioUrl,
       String? bio,
@@ -1264,11 +1352,11 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       UserLinks links,
       UserProfileImage profileImage,
       @JsonKey(name: 'instagram_username') String? instagramUsername,
-      int totalCollections,
-      int totalLikes,
-      int totalPhotos,
-      @JsonKey(name: 'accepted_tos') bool acceptedTos,
-      bool forHire});
+      int? totalCollections,
+      int? totalLikes,
+      int? totalPhotos,
+      @JsonKey(name: 'accepted_tos') bool? acceptedTos,
+      bool? forHire});
 
   @override
   $UserLinksCopyWith<$Res> get links;
@@ -1289,8 +1377,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? updatedAt = null,
     Object? username = null,
     Object? name = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? twitterUsername = freezed,
     Object? portfolioUrl = freezed,
     Object? bio = freezed,
@@ -1298,11 +1386,11 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? links = null,
     Object? profileImage = null,
     Object? instagramUsername = freezed,
-    Object? totalCollections = null,
-    Object? totalLikes = null,
-    Object? totalPhotos = null,
-    Object? acceptedTos = null,
-    Object? forHire = null,
+    Object? totalCollections = freezed,
+    Object? totalLikes = freezed,
+    Object? totalPhotos = freezed,
+    Object? acceptedTos = freezed,
+    Object? forHire = freezed,
   }) {
     return _then(_$_User(
       id: null == id
@@ -1321,14 +1409,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: null == firstName
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       twitterUsername: freezed == twitterUsername
           ? _value.twitterUsername
           : twitterUsername // ignore: cast_nullable_to_non_nullable
@@ -1357,52 +1445,52 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.instagramUsername
           : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      totalCollections: null == totalCollections
+      totalCollections: freezed == totalCollections
           ? _value.totalCollections
           : totalCollections // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalLikes: null == totalLikes
+              as int?,
+      totalLikes: freezed == totalLikes
           ? _value.totalLikes
           : totalLikes // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalPhotos: null == totalPhotos
+              as int?,
+      totalPhotos: freezed == totalPhotos
           ? _value.totalPhotos
           : totalPhotos // ignore: cast_nullable_to_non_nullable
-              as int,
-      acceptedTos: null == acceptedTos
+              as int?,
+      acceptedTos: freezed == acceptedTos
           ? _value.acceptedTos
           : acceptedTos // ignore: cast_nullable_to_non_nullable
-              as bool,
-      forHire: null == forHire
+              as bool?,
+      forHire: freezed == forHire
           ? _value.forHire
           : forHire // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_User implements _User {
+class _$_User with DiagnosticableTreeMixin implements _User {
   const _$_User(
       {required this.id,
       @JsonKey(name: 'updated_at') required this.updatedAt,
       required this.username,
       required this.name,
-      @JsonKey(name: 'first_name') required this.firstName,
-      @JsonKey(name: 'last_name') required this.lastName,
-      @JsonKey(name: 'twitter_username') required this.twitterUsername,
-      @JsonKey(name: 'portfolio_url') required this.portfolioUrl,
-      required this.bio,
-      required this.location,
+      @JsonKey(name: 'first_name') this.firstName,
+      @JsonKey(name: 'last_name') this.lastName,
+      @JsonKey(name: 'twitter_username') this.twitterUsername,
+      @JsonKey(name: 'portfolio_url') this.portfolioUrl,
+      this.bio,
+      this.location,
       required this.links,
       required this.profileImage,
-      @JsonKey(name: 'instagram_username') required this.instagramUsername,
-      required this.totalCollections,
-      required this.totalLikes,
-      required this.totalPhotos,
-      @JsonKey(name: 'accepted_tos') required this.acceptedTos,
-      required this.forHire});
+      @JsonKey(name: 'instagram_username') this.instagramUsername,
+      this.totalCollections,
+      this.totalLikes,
+      this.totalPhotos,
+      @JsonKey(name: 'accepted_tos') this.acceptedTos,
+      this.forHire});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -1417,10 +1505,10 @@ class _$_User implements _User {
   final String name;
   @override
   @JsonKey(name: 'first_name')
-  final String firstName;
+  final String? firstName;
   @override
   @JsonKey(name: 'last_name')
-  final String lastName;
+  final String? lastName;
   @override
   @JsonKey(name: 'twitter_username')
   final String? twitterUsername;
@@ -1439,20 +1527,45 @@ class _$_User implements _User {
   @JsonKey(name: 'instagram_username')
   final String? instagramUsername;
   @override
-  final int totalCollections;
+  final int? totalCollections;
   @override
-  final int totalLikes;
+  final int? totalLikes;
   @override
-  final int totalPhotos;
+  final int? totalPhotos;
   @override
   @JsonKey(name: 'accepted_tos')
-  final bool acceptedTos;
+  final bool? acceptedTos;
   @override
-  final bool forHire;
+  final bool? forHire;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'User(id: $id, updatedAt: $updatedAt, username: $username, name: $name, firstName: $firstName, lastName: $lastName, twitterUsername: $twitterUsername, portfolioUrl: $portfolioUrl, bio: $bio, location: $location, links: $links, profileImage: $profileImage, instagramUsername: $instagramUsername, totalCollections: $totalCollections, totalLikes: $totalLikes, totalPhotos: $totalPhotos, acceptedTos: $acceptedTos, forHire: $forHire)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'User'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('username', username))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('firstName', firstName))
+      ..add(DiagnosticsProperty('lastName', lastName))
+      ..add(DiagnosticsProperty('twitterUsername', twitterUsername))
+      ..add(DiagnosticsProperty('portfolioUrl', portfolioUrl))
+      ..add(DiagnosticsProperty('bio', bio))
+      ..add(DiagnosticsProperty('location', location))
+      ..add(DiagnosticsProperty('links', links))
+      ..add(DiagnosticsProperty('profileImage', profileImage))
+      ..add(DiagnosticsProperty('instagramUsername', instagramUsername))
+      ..add(DiagnosticsProperty('totalCollections', totalCollections))
+      ..add(DiagnosticsProperty('totalLikes', totalLikes))
+      ..add(DiagnosticsProperty('totalPhotos', totalPhotos))
+      ..add(DiagnosticsProperty('acceptedTos', acceptedTos))
+      ..add(DiagnosticsProperty('forHire', forHire));
   }
 
   @override
@@ -1533,30 +1646,23 @@ class _$_User implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final String id,
-      @JsonKey(name: 'updated_at')
-          required final DateTime updatedAt,
+      @JsonKey(name: 'updated_at') required final DateTime updatedAt,
       required final String username,
       required final String name,
-      @JsonKey(name: 'first_name')
-          required final String firstName,
-      @JsonKey(name: 'last_name')
-          required final String lastName,
-      @JsonKey(name: 'twitter_username')
-          required final String? twitterUsername,
-      @JsonKey(name: 'portfolio_url')
-          required final String? portfolioUrl,
-      required final String? bio,
-      required final String? location,
+      @JsonKey(name: 'first_name') final String? firstName,
+      @JsonKey(name: 'last_name') final String? lastName,
+      @JsonKey(name: 'twitter_username') final String? twitterUsername,
+      @JsonKey(name: 'portfolio_url') final String? portfolioUrl,
+      final String? bio,
+      final String? location,
       required final UserLinks links,
       required final UserProfileImage profileImage,
-      @JsonKey(name: 'instagram_username')
-          required final String? instagramUsername,
-      required final int totalCollections,
-      required final int totalLikes,
-      required final int totalPhotos,
-      @JsonKey(name: 'accepted_tos')
-          required final bool acceptedTos,
-      required final bool forHire}) = _$_User;
+      @JsonKey(name: 'instagram_username') final String? instagramUsername,
+      final int? totalCollections,
+      final int? totalLikes,
+      final int? totalPhotos,
+      @JsonKey(name: 'accepted_tos') final bool? acceptedTos,
+      final bool? forHire}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -1571,10 +1677,10 @@ abstract class _User implements User {
   String get name;
   @override
   @JsonKey(name: 'first_name')
-  String get firstName;
+  String? get firstName;
   @override
   @JsonKey(name: 'last_name')
-  String get lastName;
+  String? get lastName;
   @override
   @JsonKey(name: 'twitter_username')
   String? get twitterUsername;
@@ -1593,16 +1699,16 @@ abstract class _User implements User {
   @JsonKey(name: 'instagram_username')
   String? get instagramUsername;
   @override
-  int get totalCollections;
+  int? get totalCollections;
   @override
-  int get totalLikes;
+  int? get totalLikes;
   @override
-  int get totalPhotos;
+  int? get totalPhotos;
   @override
   @JsonKey(name: 'accepted_tos')
-  bool get acceptedTos;
+  bool? get acceptedTos;
   @override
-  bool get forHire;
+  bool? get forHire;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
@@ -1614,13 +1720,13 @@ UserLinks _$UserLinksFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserLinks {
-  String get self => throw _privateConstructorUsedError;
-  String get html => throw _privateConstructorUsedError;
-  String get photos => throw _privateConstructorUsedError;
-  String get likes => throw _privateConstructorUsedError;
-  String get portfolio => throw _privateConstructorUsedError;
-  String get following => throw _privateConstructorUsedError;
-  String get followers => throw _privateConstructorUsedError;
+  String? get self => throw _privateConstructorUsedError;
+  String? get html => throw _privateConstructorUsedError;
+  String? get photos => throw _privateConstructorUsedError;
+  String? get likes => throw _privateConstructorUsedError;
+  String? get portfolio => throw _privateConstructorUsedError;
+  String? get following => throw _privateConstructorUsedError;
+  String? get followers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1634,13 +1740,13 @@ abstract class $UserLinksCopyWith<$Res> {
       _$UserLinksCopyWithImpl<$Res, UserLinks>;
   @useResult
   $Res call(
-      {String self,
-      String html,
-      String photos,
-      String likes,
-      String portfolio,
-      String following,
-      String followers});
+      {String? self,
+      String? html,
+      String? photos,
+      String? likes,
+      String? portfolio,
+      String? following,
+      String? followers});
 }
 
 /// @nodoc
@@ -1656,43 +1762,43 @@ class _$UserLinksCopyWithImpl<$Res, $Val extends UserLinks>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? self = null,
-    Object? html = null,
-    Object? photos = null,
-    Object? likes = null,
-    Object? portfolio = null,
-    Object? following = null,
-    Object? followers = null,
+    Object? self = freezed,
+    Object? html = freezed,
+    Object? photos = freezed,
+    Object? likes = freezed,
+    Object? portfolio = freezed,
+    Object? following = freezed,
+    Object? followers = freezed,
   }) {
     return _then(_value.copyWith(
-      self: null == self
+      self: freezed == self
           ? _value.self
           : self // ignore: cast_nullable_to_non_nullable
-              as String,
-      html: null == html
+              as String?,
+      html: freezed == html
           ? _value.html
           : html // ignore: cast_nullable_to_non_nullable
-              as String,
-      photos: null == photos
+              as String?,
+      photos: freezed == photos
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
-              as String,
-      likes: null == likes
+              as String?,
+      likes: freezed == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as String,
-      portfolio: null == portfolio
+              as String?,
+      portfolio: freezed == portfolio
           ? _value.portfolio
           : portfolio // ignore: cast_nullable_to_non_nullable
-              as String,
-      following: null == following
+              as String?,
+      following: freezed == following
           ? _value.following
           : following // ignore: cast_nullable_to_non_nullable
-              as String,
-      followers: null == followers
+              as String?,
+      followers: freezed == followers
           ? _value.followers
           : followers // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -1705,13 +1811,13 @@ abstract class _$$_UserLinksCopyWith<$Res> implements $UserLinksCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String self,
-      String html,
-      String photos,
-      String likes,
-      String portfolio,
-      String following,
-      String followers});
+      {String? self,
+      String? html,
+      String? photos,
+      String? likes,
+      String? portfolio,
+      String? following,
+      String? followers});
 }
 
 /// @nodoc
@@ -1725,80 +1831,94 @@ class __$$_UserLinksCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? self = null,
-    Object? html = null,
-    Object? photos = null,
-    Object? likes = null,
-    Object? portfolio = null,
-    Object? following = null,
-    Object? followers = null,
+    Object? self = freezed,
+    Object? html = freezed,
+    Object? photos = freezed,
+    Object? likes = freezed,
+    Object? portfolio = freezed,
+    Object? following = freezed,
+    Object? followers = freezed,
   }) {
     return _then(_$_UserLinks(
-      self: null == self
+      self: freezed == self
           ? _value.self
           : self // ignore: cast_nullable_to_non_nullable
-              as String,
-      html: null == html
+              as String?,
+      html: freezed == html
           ? _value.html
           : html // ignore: cast_nullable_to_non_nullable
-              as String,
-      photos: null == photos
+              as String?,
+      photos: freezed == photos
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
-              as String,
-      likes: null == likes
+              as String?,
+      likes: freezed == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as String,
-      portfolio: null == portfolio
+              as String?,
+      portfolio: freezed == portfolio
           ? _value.portfolio
           : portfolio // ignore: cast_nullable_to_non_nullable
-              as String,
-      following: null == following
+              as String?,
+      following: freezed == following
           ? _value.following
           : following // ignore: cast_nullable_to_non_nullable
-              as String,
-      followers: null == followers
+              as String?,
+      followers: freezed == followers
           ? _value.followers
           : followers // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserLinks implements _UserLinks {
+class _$_UserLinks with DiagnosticableTreeMixin implements _UserLinks {
   const _$_UserLinks(
-      {required this.self,
-      required this.html,
-      required this.photos,
-      required this.likes,
-      required this.portfolio,
-      required this.following,
-      required this.followers});
+      {this.self,
+      this.html,
+      this.photos,
+      this.likes,
+      this.portfolio,
+      this.following,
+      this.followers});
 
   factory _$_UserLinks.fromJson(Map<String, dynamic> json) =>
       _$$_UserLinksFromJson(json);
 
   @override
-  final String self;
+  final String? self;
   @override
-  final String html;
+  final String? html;
   @override
-  final String photos;
+  final String? photos;
   @override
-  final String likes;
+  final String? likes;
   @override
-  final String portfolio;
+  final String? portfolio;
   @override
-  final String following;
+  final String? following;
   @override
-  final String followers;
+  final String? followers;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserLinks(self: $self, html: $html, photos: $photos, likes: $likes, portfolio: $portfolio, following: $following, followers: $followers)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserLinks'))
+      ..add(DiagnosticsProperty('self', self))
+      ..add(DiagnosticsProperty('html', html))
+      ..add(DiagnosticsProperty('photos', photos))
+      ..add(DiagnosticsProperty('likes', likes))
+      ..add(DiagnosticsProperty('portfolio', portfolio))
+      ..add(DiagnosticsProperty('following', following))
+      ..add(DiagnosticsProperty('followers', followers));
   }
 
   @override
@@ -1839,31 +1959,31 @@ class _$_UserLinks implements _UserLinks {
 
 abstract class _UserLinks implements UserLinks {
   const factory _UserLinks(
-      {required final String self,
-      required final String html,
-      required final String photos,
-      required final String likes,
-      required final String portfolio,
-      required final String following,
-      required final String followers}) = _$_UserLinks;
+      {final String? self,
+      final String? html,
+      final String? photos,
+      final String? likes,
+      final String? portfolio,
+      final String? following,
+      final String? followers}) = _$_UserLinks;
 
   factory _UserLinks.fromJson(Map<String, dynamic> json) =
       _$_UserLinks.fromJson;
 
   @override
-  String get self;
+  String? get self;
   @override
-  String get html;
+  String? get html;
   @override
-  String get photos;
+  String? get photos;
   @override
-  String get likes;
+  String? get likes;
   @override
-  String get portfolio;
+  String? get portfolio;
   @override
-  String get following;
+  String? get following;
   @override
-  String get followers;
+  String? get followers;
   @override
   @JsonKey(ignore: true)
   _$$_UserLinksCopyWith<_$_UserLinks> get copyWith =>
@@ -1974,7 +2094,9 @@ class __$$_UserProfileImageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserProfileImage implements _UserProfileImage {
+class _$_UserProfileImage
+    with DiagnosticableTreeMixin
+    implements _UserProfileImage {
   const _$_UserProfileImage(
       {required this.small, required this.medium, required this.large});
 
@@ -1989,8 +2111,18 @@ class _$_UserProfileImage implements _UserProfileImage {
   final String large;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserProfileImage(small: $small, medium: $medium, large: $large)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserProfileImage'))
+      ..add(DiagnosticsProperty('small', small))
+      ..add(DiagnosticsProperty('medium', medium))
+      ..add(DiagnosticsProperty('large', large));
   }
 
   @override

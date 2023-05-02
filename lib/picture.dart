@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
 part 'picture.freezed.dart';
 part 'picture.g.dart';
@@ -23,6 +24,7 @@ abstract class Picture with _$Picture {
     required int likes,
     @JsonKey(name: 'liked_by_user') required bool likedByUser,
     required List<Tag> tags,
+    required User user,
   }) = _Picture;
 
   factory Picture.fromJson(Map<String, dynamic> json) =>
@@ -73,20 +75,20 @@ class User with _$User {
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
     required String username,
     required String name,
-    @JsonKey(name: 'first_name') required String firstName,
-    @JsonKey(name: 'last_name') required String lastName,
-    @JsonKey(name: 'twitter_username') required String? twitterUsername,
-    @JsonKey(name: 'portfolio_url') required String? portfolioUrl,
-    required String? bio,
-    required String? location,
+    @JsonKey(name: 'first_name') String? firstName,
+    @JsonKey(name: 'last_name')  String? lastName,
+    @JsonKey(name: 'twitter_username')  String? twitterUsername,
+    @JsonKey(name: 'portfolio_url') String? portfolioUrl,
+     String? bio,
+     String? location,
     required UserLinks links,
     required UserProfileImage profileImage,
-    @JsonKey(name: 'instagram_username') required String? instagramUsername,
-    required int totalCollections,
-    required int totalLikes,
-    required int totalPhotos,
-    @JsonKey(name: 'accepted_tos') required bool acceptedTos,
-    required bool forHire,
+    @JsonKey(name: 'instagram_username')  String? instagramUsername,
+     int? totalCollections,
+     int? totalLikes,
+     int? totalPhotos,
+    @JsonKey(name: 'accepted_tos')  bool? acceptedTos,
+    bool? forHire,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(Map<String,dynamic>.from(json));
@@ -94,13 +96,13 @@ class User with _$User {
 @freezed
 class UserLinks with _$UserLinks {
   const factory UserLinks({
-    required String self,
-    required String html,
-    required String photos,
-    required String likes,
-    required String portfolio,
-    required String following,
-    required String followers,
+   String? self,
+   String? html,
+   String? photos,
+   String? likes,
+   String? portfolio,
+   String? following,
+   String? followers,
   }) = _UserLinks;
 
   factory UserLinks.fromJson(Map<String, dynamic> json) => _$UserLinksFromJson(Map<String,dynamic>.from(json));
